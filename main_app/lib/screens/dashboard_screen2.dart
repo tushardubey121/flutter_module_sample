@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:loan_module/loan_module.dart' show RouterRef;
+import 'package:loan_module/navigation/nav.dart';
 
 class DashboardScreen2 extends ConsumerWidget {
   const DashboardScreen2({super.key});
@@ -8,9 +8,7 @@ class DashboardScreen2 extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Main Dashboard 2'),
-      ),
+      appBar: AppBar(title: const Text('Main Dashboard 2')),
       body: Center(
         child: ElevatedButton(
           onPressed: () => ref.pop(),
