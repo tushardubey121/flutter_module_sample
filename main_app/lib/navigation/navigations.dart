@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,18 +9,10 @@ extension Navigations on WidgetRef {
   Future<T?> push<T>(String location) => this.context.push<T>(location);
 
   void pop({String fallback = '/'}) {
-    if (kIsWeb) {
-      if (this.context.canPop()) {
-        browserHistoryBack();
-      } else {
-        this.context.go(fallback);
-      }
-      return;
-    }
     if (this.context.canPop()) {
       this.context.pop();
-    } else {
-      this.context.go(fallback);
+      return;
     }
+    maybeBrowserBackOrGo(this.context, fallback);
   }
 }
