@@ -1,10 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:loan_module/src/screens/loan_home_screen.dart';
-
-import 'src/navigation/nav.dart';
 import 'src/screens/home_load_approve.dart';
+import 'src/screens/loan_home_screen.dart';
 
 class LoanModule {
   static List<RouteBase> get routes => [

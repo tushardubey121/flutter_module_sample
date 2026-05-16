@@ -1,6 +1,6 @@
+import 'package:dummy_flutter_module/src/navigation/nav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:loan_module/src/navigation/nav.dart';
 
 class LoanHomeScreen extends ConsumerWidget {
   const LoanHomeScreen({super.key});
