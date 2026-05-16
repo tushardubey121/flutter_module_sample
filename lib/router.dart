@@ -1,3 +1,4 @@
+import 'package:dummy_flutter_module/loan_module.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'screens/dashboard_screen.dart';
@@ -16,7 +17,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/dashboard2',
         builder: (_, __) => const DashboardScreen2(),
       ),
-      // ...LoanModule.routes,
+      ...LoanModule.routes,
     ],
   );
 });
