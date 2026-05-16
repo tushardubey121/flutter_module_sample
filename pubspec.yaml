@@ -12,8 +12,9 @@ dependencies:
   go_router: ^14.2.0
   web: ^1.1.0
 
-  loan_module:
-    path: ../packages/loan_module
+  dummy_flutter_module:
+    git:
+      url: https://github.com/tushardubey121/dummy_flutter_module.git
 
 flutter:
   uses-material-design: true
