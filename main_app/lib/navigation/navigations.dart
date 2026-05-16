@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import 'browser_back_stub.dart' if (dart.library.html) 'browser_back_web.dart';
 
-extension Nav on WidgetRef {
+extension Navigations on WidgetRef {
   void goTo(String location) => this.context.go(location);
 
   Future<T?> push<T>(String location) => this.context.push<T>(location);
