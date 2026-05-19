@@ -41,16 +41,16 @@ class NavigationDelegate extends RouterDelegate<NavigationStack>
   List<Page<void>> _pages() => stack.items
       .map(
         (item) => switch (item) {
-          DashboardScreenPage() => const MaterialPage<void>(
-              key: ValueKey('dashboard'),
-              child: DashboardScreen(),
+          DashboardScreenPage() => MaterialPage<void>(
+              // key: ValueKey(item),
+              child: const DashboardScreen(),
             ),
-          DashboardScreen2Page() => const MaterialPage<void>(
-              key: ValueKey('dashboard-2'),
-              child: DashboardScreen2(),
+          DashboardScreen2Page() => MaterialPage<void>(
+              // key: ValueKey(item),
+              child: const DashboardScreen2(),
             ),
           DashboardScreenLoan(:final location) => MaterialPage<void>(
-              key: ValueKey('loan-$location'),
+              // key: ValueKey('loan-$location'),
               child: LoanModuleShell(
                 location: location,
                 onLocationChanged: stack.updateLoanLocation,

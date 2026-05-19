@@ -13,8 +13,9 @@ dependencies:
   web: ^1.1.0
 
   dummy_flutter_module:
-    git:
-      url: https://github.com/tushardubey121/dummy_flutter_module.git
+    path: dummy_flutter_module
+#    git:
+#      url: https://github.com/tushardubey121/dummy_flutter_module.git
 
 flutter:
   uses-material-design: true

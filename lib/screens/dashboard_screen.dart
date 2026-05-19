@@ -15,7 +15,7 @@ class DashboardScreen extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             ElevatedButton(
-              onPressed: () => ref.push(DashboardScreenPage()),
+              onPressed: () => ref.push(DashboardScreen2Page()),
               child: const Text('Open Dashboard 2'),
             ),
             const SizedBox(height: 12),
