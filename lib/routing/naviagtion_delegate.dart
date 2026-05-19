@@ -1,20 +1,20 @@
-import 'package:dummy_flutter_module/loan_module.dart';
+import 'package:dummy_flutter_module/src/loan_module_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_module_sample/routing/navigation_stack_item.dart';
 import 'package:flutter_module_sample/screens/dashboard_screen.dart';
 import 'package:flutter_module_sample/screens/dashboard_screen2.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'navigation_stack.dart';
 
 final globalNavigatorKey = GlobalKey<NavigatorState>();
 
-class NavigationDelegate extends RouterDelegate<NavigationStack> with ChangeNotifier, PopNavigatorRouterDelegateMixin {
-  final NavigationStack stack;
-
-  NavigationDelegate(this.stack) : super() {
+class NavigationDelegate extends RouterDelegate<NavigationStack>
+    with ChangeNotifier, PopNavigatorRouterDelegateMixin {
+  NavigationDelegate(this.stack) {
     stack.addListener(notifyListeners);
   }
+
+  final NavigationStack stack;
 
   @override
   void dispose() {
@@ -23,31 +23,42 @@ class NavigationDelegate extends RouterDelegate<NavigationStack> with ChangeNoti
   }
 
   @override
-  final navigatorKey = globalNavigatorKey;
+  final GlobalKey<NavigatorState> navigatorKey = globalNavigatorKey;
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, ref, child) {
-      return Navigator(
-        key: navigatorKey,
-        pages: _pages(ref),
-        onPopPage: (route, result) {
-          if (!route.didPop(result)) {
-            return false;
-          }
-          stack.pop();
-          return true;
-        },
-      );
-    });
+    return Navigator(
+      key: navigatorKey,
+      pages: _pages(),
+      onPopPage: (route, result) {
+        if (!route.didPop(result)) return false;
+        stack.pop();
+        return true;
+      },
+    );
   }
 
-  List<Page> _pages(WidgetRef ref) => stack.items
-      .mapIndexed((e, i) => switch (e) {
-            DashboardScreenPage() => MaterialPage(child: DashboardScreen()),
-            DashboardScreen2Page() => MaterialPage(child: DashboardScreen2()),
-            DashboardScreenLoan() => MaterialPage(child: LoanHomeScreen()),
-          })
+  List<Page<void>> _pages() => stack.items
+      .map(
+        (item) => switch (item) {
+          DashboardScreenPage() => const MaterialPage<void>(
+              key: ValueKey('dashboard'),
+              child: DashboardScreen(),
+            ),
+          DashboardScreen2Page() => const MaterialPage<void>(
+              key: ValueKey('dashboard-2'),
+              child: DashboardScreen2(),
+            ),
+          DashboardScreenLoan(:final location) => MaterialPage<void>(
+              key: ValueKey('loan-$location'),
+              child: LoanModuleShell(
+                location: location,
+                onLocationChanged: stack.updateLoanLocation,
+                onExit: stack.pop,
+              ),
+            ),
+        },
+      )
       .toList();
 
   @override
@@ -56,21 +67,5 @@ class NavigationDelegate extends RouterDelegate<NavigationStack> with ChangeNoti
   @override
   Future<void> setNewRoutePath(NavigationStack configuration) async {
     stack.items = configuration.items;
-  }
-}
-
-extension _IndexedIterable<E> on Iterable<E> {
-  Iterable<T> mapIndexed<T>(T Function(E e, int i) f) {
-    var i = 0;
-    return map((e) => f(e, i++));
-  }
-}
-
-class NotFound extends StatelessWidget {
-  const NotFound({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }

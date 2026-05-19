@@ -91,4 +91,13 @@ class NavigationStack with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  void updateLoanLocation(String location) {
+    final index = _items.lastIndexWhere((item) => item is DashboardScreenLoan);
+    if (index == -1) return;
+    final current = _items[index] as DashboardScreenLoan;
+    if (current.location == location) return;
+    _items[index] = DashboardScreenLoan(location: location);
+    notifyListeners();
+  }
 }

@@ -5,12 +5,11 @@ import 'package:flutter_module_sample/routing/navigation_stack.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
-
 void main() {
   usePathUrlStrategy();
   runApp(
-    ProviderScope(
-      child: const MyApp(),
+    const ProviderScope(
+      child: MyApp(),
     ),
   );
 }
@@ -20,11 +19,11 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final stack = ref.watch(navigationStackProvider);
     return MaterialApp.router(
       title: 'Main App',
-      // routerConfig: ref.watch(routerProvider),
-      routeInformationParser: NavigationParser(ref, context),
-      routerDelegate: NavigationDelegate(ref.read(navigationStackProvider)),
+      routeInformationParser: NavigationParser(),
+      routerDelegate: NavigationDelegate(stack),
     );
   }
 }
