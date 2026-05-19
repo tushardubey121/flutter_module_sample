@@ -17,7 +17,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/dashboard2',
         builder: (_, __) => const DashboardScreen2(),
       ),
-      ...LoanModule.routes,
+      ...LoanModuleRouter.routes,
     ],
   );
 });
